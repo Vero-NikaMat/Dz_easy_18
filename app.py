@@ -9,7 +9,7 @@ from setup_db import db
 from views.directors import director_ns
 from views.genres import genre_ns
 from views.movies import movie_ns
-from models import Review, Book
+from models import Movie, Director, Genre
 
 
 def create_app(config_object):
@@ -32,11 +32,13 @@ def register_extensions(app):
 def create_data(app, db):
     with app.app_context():
         db.create_all()
+        film = Movie(id=21, title="Новый фильм", description="Такого фильма нет, значит и описания нет", trailer = "ссылка", year=2022, rating=0, genre_id=9, director_id=21)
+        director_new = Director(id=21, name="Никто")
 
-        создать несколько сущностей чтобы добавить их в БД
+        # создать несколько сущностей чтобы добавить их в БД
 
         with db.session.begin():
-            db.session.add_all(здесь список созданных объектов)
+            db.session.add_all([film, director_new])
 
 
 app = create_app(Config())
